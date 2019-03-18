@@ -5,4 +5,5 @@
 	{% endfor %}
 </ul>
 
+print({% url 'polls:detail' question.id %})
 <a href="{% url 'polls:detail' question.id %}">Vote again?</a>

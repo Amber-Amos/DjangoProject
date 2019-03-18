@@ -8,25 +8,26 @@ from django.shortcuts import get_object_or_404, render
 # Create your views here.
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
-    context_object_name = 'lastest_question_list'
+    context_object_name = 'latest_question_list'
 
     def get_queryset(self):
         return Question.objects.order_by('-pub_date')[:5]
 class DetailView(generic.DetailView):
     model = Question
-    template_name = 'polls/detail.html'
+    template_name ='polls/detail.html'
 
 class ResultsView(generic.DetailView):
     model = Question 
     template_name = 'polls/results.html'
 
 def index(request):
-    lastest_question_list=Question.objects.order_by('-pub_date')[:5]
+    latest_question_list=Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('polls/index.html')
     context = {
-            'latest_question_list': lastest_question_list,
+            'latest_question_list': latest_question_list,
     }
     #output = ', '.join([q.question_text for q in lastest_question_list])
+    print (latest_question_list)
     return HttpResponse(template.render(context, request))
 
 def detail(request, question_id):
